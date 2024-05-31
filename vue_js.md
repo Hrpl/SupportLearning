@@ -6,9 +6,9 @@
 
 Привязка данных происходит при помощи атрибута v-model="nameVar"
 
-Чтобы создать цикл переборки массива необходимо: <div v-for="(el, index) in array" : key="index">  
+Чтобы создать цикл переборки массива необходимо: div v-for="(el, index) in array" : key="index"
 
-Чтобы создать ветвление необходимо: <div v-if="userVar"> и <div v-else-if="userVar"> и <div v-else="userVar">
+Чтобы создать ветвление необходимо: div v-if="userVar" и div v-else-if="userVar" и div v-else="userVar"
 
 Чтобы использовать компоненты Vue необходимо:
 * import CompName from 'route'
