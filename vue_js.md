@@ -21,3 +21,6 @@
 * в дочернем компоненте необходимо добавить export default { props: {value:{type:, required:,},}
 
 Для получения данных из API необходимо установить библиотеку axios "npm i axios"
+
+## Bootstrap
+Для подключения bootstrap необходимо выполнить команду по установке пакета npm install bootstrap-vue bootstrap --save
