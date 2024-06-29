@@ -9,6 +9,7 @@
 
 Ввод с консоли:  
 ```java
+  import java.util.Scanner;  
   Scanner in = new Scanner(System.in);  
   System.out.print("Input a number: ");  
   int num = in.nextInt();  
