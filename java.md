@@ -24,3 +24,7 @@
 * nextByte(): считывает введенное число byte
 * nextFloat(): считывает введенное число float
 * nextShort(): считывает введенное число short
+
+## Spring Web API
+
+Для создания проекта необходимо добавить зависимости: Spring Web и Spring Boot DevTools
