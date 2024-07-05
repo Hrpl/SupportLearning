@@ -23,7 +23,10 @@
 * nextBoolean(): считывает значение boolean
 * nextByte(): считывает введенное число byte
 * nextFloat(): считывает введенное число float
-* nextShort(): считывает введенное число short
+* nextShort(): считывает введенное число short  
+
+Аналогом LINQ служит Stream API  
+При работе с ним, мы можем столкнуться с тем, что запрос ничего не вернёт и метод get() ничего не вернёт. Т.к. get() просто переводит результат из Optional<T>(аналог Task<T>) -> T, мы можем использовать методы объекта Optional для проверки результата
 
 ## Spring Web API
 
@@ -36,14 +39,10 @@
 
 Models
 ```java
-package com.webapi.firstapi.models;
-
-public record User(String name,
+public record User(int id,
+                   String name,
                    int age,
-                   String Email)
-{
-}
-
+                   String Email){}
 ```
 
 Service
@@ -53,8 +52,6 @@ package com.webapi.firstapi.services;
 import com.webapi.firstapi.models.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Repository
@@ -65,13 +62,20 @@ public class UserService {
         return users;
     }
 
+    public Optional<User> findById(int id){
+        return users.stream().filter(w -> w.id() == id).findFirst();
+    }
+
+
     @PostConstruct
     private void init(){
-        users.add(new User("Andrey",
+        users.add(new User( 1,
+                "Andrey",
                 18,
                 "example@mail.ru")
         );
-        users.add(new User("Oleg",
+        users.add(new User(2,
+                "Oleg",
                 20,
                 "Oleg@example.com")
         );
@@ -83,14 +87,8 @@ Controller
 ```java 
 package com.webapi.firstapi.controller;
 
-import com.webapi.firstapi.models.User;
-import com.webapi.firstapi.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-
 @RestController
+@RequestMapping("api/users/")
 public class UserController {
 
     private final UserService userService;
@@ -99,9 +97,20 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/Users")
-    List<User> GetUsers(){
+    @GetMapping("")
+    List<User> findAll(){
         return userService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    User findUserByid(@PathVariable int id){
+        var user = userService.findById(id);
+        if(user.isPresent()){
+            return user.get();
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"); // Выводит статус код ошибки 404
+        }
     }
 }
 ```
