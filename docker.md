@@ -4,7 +4,9 @@
 
 ### Postgres
 Чтобы создать контейнер postgres  
-```cmd docker run --name postgres -p 5439:5432 -e POSTGRES_PASSWORD=12345 -d postgres  ```
+```cmd 
+docker run --name postgres -p 5439:5432 -e POSTGRES_PASSWORD=12345 -d postgres
+ ```
 И во вкладке Inspect определить порт  
 
 Для добавления в оркестрацию необходим следующий код
