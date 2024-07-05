@@ -122,3 +122,13 @@ public class UserController {
   <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 ```
+Что бы валидация заработала, необходимо указать аннотации
+```java
+import jakarta.validation.constraints.NotEmpty;
+
+public record User(int id,
+                   @NotEmpty
+                   String name,
+                   int age,
+                   String Email){}
+```
