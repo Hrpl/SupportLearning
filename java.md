@@ -132,3 +132,24 @@ public record User(int id,
                    int age,
                    String Email){}
 ```
+Остальные варианты валидации можно посмотреть в исходном пакете
+
+### База данных PostgreSQL
+Для этого добавим зависимости
+```xml
+ <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-docker-compose</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+```
+Так же необходимо скопировать файл compose.yaml
+
+
+
