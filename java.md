@@ -114,3 +114,11 @@ public class UserController {
     }
 }
 ```
+### Валидация
+Для валидации используется зависимость
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
