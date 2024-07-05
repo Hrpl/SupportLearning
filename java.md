@@ -31,3 +31,77 @@
 
 Что бы создать какой либо объект и внести его в контекст приложения Spring необходимо указать анотацию  
 Для контроллера анотация является @RestController, а для конечной точки @GetMapping
+
+###Пример API
+
+Models
+```java
+package com.webapi.firstapi.models;
+
+public record User(String name,
+                   int age,
+                   String Email)
+{
+}
+
+```
+
+Service
+```java
+package com.webapi.firstapi.services;
+
+import com.webapi.firstapi.models.User;
+import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Repository
+public class UserService {
+    private List<User> users = new ArrayList<>();
+
+    public List<User> findAll(){
+        return users;
+    }
+
+    @PostConstruct
+    private void init(){
+        users.add(new User("Andrey",
+                18,
+                "example@mail.ru")
+        );
+        users.add(new User("Oleg",
+                20,
+                "Oleg@example.com")
+        );
+    }
+}
+```
+
+Controller
+```java 
+package com.webapi.firstapi.controller;
+
+import com.webapi.firstapi.models.User;
+import com.webapi.firstapi.services.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class UserController {
+
+    private final UserService userService;
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
+
+    @GetMapping("/Users")
+    List<User> GetUsers(){
+        return userService.findAll();
+    }
+}
+```
