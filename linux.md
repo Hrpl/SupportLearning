@@ -7,7 +7,7 @@
   * -l - узнать полную информацию о папке и правах доступа
 * cd nameFolder - перейти в папку
 * clear - очистить терминал
-    
+     <br/>
 * touch nameFile.txt - создать файл с именем nameFile с расширением txt
 * nano nameFile.txt - открыть файл для редактирования, если файла с таким именем нет, то создать его
 * mkdir - создать папку
@@ -24,6 +24,6 @@
 * sudo su - зайти в режим администратора в косноли (su - switch user)  
 * sudo chown root:root file.txt - поменять владелецев файла (chown - change owner)
 * sudo chmod 664 - 4-r, 6-wr, 7-полный доступ (chmod - change mode)
-    
+  <br/>
 * sudo chown -R root:root folder - поменять владельцев папки
 * sudo chmod -R 764 - 4-r, 6-wr, 7-полный доступ (chmod - change mode)
