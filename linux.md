@@ -7,7 +7,8 @@
   * -l - узнать полную информацию о папке и правах доступа
 * cd nameFolder - перейти в папку
 * clear - очистить терминал
-     <br/>
+
+### CRUD
 * touch nameFile.txt - создать файл с именем nameFile с расширением txt
 * nano nameFile.txt - открыть файл для редактирования, если файла с таким именем нет, то создать его
 * mkdir - создать папку
@@ -17,13 +18,13 @@
   * rm folder/* - удалить все файлы (но не папки!)
   * rm folder/*.txt - удалить все файлы с расширением txt
   * rm -rf folder - удалить папку
-  * 
+    
 ## Права пользователей
 
 Чтобы выполнить команду с правами администратора, перед командой необходимо прописать ***sudo*** (super user do)  
 * sudo su - зайти в режим администратора в косноли (su - switch user)  
 * sudo chown root:root file.txt - поменять владелецев файла (chown - change owner)
 * sudo chmod 664 - 4-r, 6-wr, 7-полный доступ (chmod - change mode)
-  <br/>
+
 * sudo chown -R root:root folder - поменять владельцев папки
 * sudo chmod -R 764 - 4-r, 6-wr, 7-полный доступ (chmod - change mode)
