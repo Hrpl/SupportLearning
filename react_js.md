@@ -62,6 +62,17 @@ export default function App(){
   
   <Button onClick={() => handleClick('param')}>
 }
+```
 
+## Реактивность и отслеживания состояния
 
+Для отслеживания состояний необходимо импортировать следующий хук
+```jsx
+import {useState} from 'react'
+
+export default functiom App(){
+  const state = useState("data")
+
+  //остальной код
+}
 ```
