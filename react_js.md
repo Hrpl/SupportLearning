@@ -59,8 +59,10 @@ export default function App(){
   function handleClick(type){
     console.log(type)
   }
-  
+
+  return(
   <Button onClick={() => handleClick('param')}>
+  )
 }
 ```
 
@@ -73,7 +75,8 @@ import {useState} from 'react'
 export default functiom App(){
   const [value, setValue] = useState(1)
 
+  return(
   <button onClick={() => setValue(value++)}></button>
-  //остальной код
+  //остальной код)
 }
 ```
