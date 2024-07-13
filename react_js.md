@@ -71,8 +71,9 @@ export default function App(){
 import {useState} from 'react'
 
 export default functiom App(){
-  const state = useState("data")
+  const [value, setValue] = useState(1)
 
+  <button onClick={() => setValue(value++)}></button>
   //остальной код
 }
 ```
