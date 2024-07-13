@@ -18,3 +18,17 @@ npm run dev
 import logo from './logo.svg'
 <img src={logo} />
 ```
+
+Для передачи параметров
+```jsx
+export default function Way(props){
+  <p>{props.title}</p>
+}
+
+function App(){
+  return(
+    <Way title="Заголовок"/>
+  )
+}
+```
+Т.е. мы можем обращаться к различным атрибутам элемента, которые будут хранится в объекте props
