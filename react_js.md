@@ -3,4 +3,6 @@
 Для создания приложение React необходимо выполнить команду
 ```cmd
 npm create vite@latest
+npm install
+npm run dev
 ```
