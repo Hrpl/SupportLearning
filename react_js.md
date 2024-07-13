@@ -21,7 +21,7 @@ import logo from './logo.svg'
 
 Для передачи параметров
 ```jsx
-export default function Way(props){
+export default function Way({props}){
   <p>{props.title}</p>
 }
 
@@ -34,7 +34,7 @@ function App(){
 Т.е. мы можем обращаться к различным атрибутам элемента, которые будут хранится в объекте props. Либо же можем использовать одноимённые параметры.  
 Так же возможен другой способ
 ```jsx
-export default function Way(children){
+export default function Way({children}){
   <p>{children}</p>
 }
 
@@ -44,4 +44,24 @@ function App(){
   )
 }
 ```
-Всё, что будет между тегами, будет поподать в children
+Всё, что будет между тегами, будет поподать в children  
+
+Для отслеживания событий в дочернем компоненте
+
+```jsx
+export default function Button({eventClicked}){
+  <button  onClick={eventClicked}></button>
+}
+
+
+export default function App(){
+
+  function handleClick(type){
+    console.log(type)
+  }
+  
+  <Button onClick={() => handleClick('param')}>
+}
+
+
+```
