@@ -75,13 +75,27 @@ if(isActive === 'active') isActive = true
 Все компоненты React содержать возращаемое значение с кодом - оно обязательно должно быть одинарным, либо передаваться как массив. Это объясняется тем, как работает jsx и имеет следующий синтаксис
 
 ```jsx
-export default function Internal(){
+import React from 'react'
+export default function App(){
   return React.createElement('div', null, [
     return React.createElement('p', 
       {className: {'flex', style: {color: 'red'}}}, 
       "Содержание тега"
     )
   ])
+}
+```
+
+Привязка данных к форме осуществляется следующим образом
+```jsx
+import {useState} from 'react'
+
+export default function App(){
+const [content, setContent] = useState('')
+
+return(
+  <input value={content} onChange="(event) => setContent(event.target.value)">
+)
 }
 ```
 ## Реактивность и отслеживания состояния
