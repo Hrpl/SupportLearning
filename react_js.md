@@ -66,6 +66,13 @@ export default function App(){
 }
 ```
 
+Для определения классов можно использовать следующий синтаксис 
+```jsx
+if(isActive === 'active') isActive = true
+
+<button className={isActive ? 'btn active' : 'btn'}></button>
+```
+
 ## Реактивность и отслеживания состояния
 
 Для отслеживания состояний необходимо импортировать следующий хук
