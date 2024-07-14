@@ -112,3 +112,20 @@ export default functiom App(){
   //остальной код)
 }
 ```
+Для отслеживания состояний нескольких переменных можно их значения хранить в объекте, для этого возможен следующий синтаксис
+```jsx
+import {useState} from 'react'
+
+export default functiom App(){
+  const [form, setFrom] = useState({
+    name: '',
+    female: '',
+    surname: ''
+  })
+
+  return(
+  <input value={form.name} onChange={(event) => setForm((prev) => {...prev, name: event.target.value})}>
+  //остальной код)
+}
+```
+Функция useState определяет объект со всеми полями, а input обновляет значение только поля name. Что бы не потерять все значения, используется спред оператор(...prev), который раскладывает объект на оставшиеся поля
