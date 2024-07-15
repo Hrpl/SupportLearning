@@ -152,3 +152,46 @@ const textRef = useRef(null)
 ```
 ***useCallback*** - кэширует функцию Callback, используем когда передаем Callback дочерним компонентам или хотим избежать ненужных рендеров.  
 ***useMemo*** - кэшируте результат функции и используется для оптимизации производительности за счёт сохранения точных вычислений.  
+
+Для работы с какими-то данными во всем приложении можно создать контекст приложения. Чтобы это заработало необходимо в файле main.jsx <App /> обернуть в AuthProvider
+```jsx
+import { Children, createContext, useState } from "react";
+import { useAuth } from "./hooks/useAuth";
+
+export const AuthContext = createContext({
+    isLogin: false,
+    setIsLogin: null
+})
+
+export const AuthProvider = ({children}) => {
+    const [isLogin, setIsLogin] = useAuth()
+
+    return(
+
+        <AuthContext.Provider
+            value={{
+                isLogin,
+                setIsLogin,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    )
+}
+```
+Чтобы использовать этот контекст, можно создать свой хук
+```jsx
+export function App(){
+  const [isLogin, setIsLogin] = useAuth()
+}
+
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
+
+export function useAuth(){
+    return useContext(AuthContext)
+}
+```
+
+
+
