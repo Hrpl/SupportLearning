@@ -116,9 +116,9 @@ public class UserController {
 ```
 
 В этом примере, чтобы предотвратить сериализацию списка книг в JSON при выводе информации об авторе, вы можете использовать аннотацию @JsonManagedReference на стороне книги:
-
-@Entity
 ```java
+@Entity
+
 public class Book {
     // ...
 
