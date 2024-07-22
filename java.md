@@ -128,7 +128,7 @@ public class Book {
     private Author author;
 
     // ...
-}```
+} ```
 И аннотацию @JsonBackReference на стороне автора:
 ```java
 @Entity
@@ -140,7 +140,7 @@ public class Author {
     private List<Book> books = new ArrayList<>();
 
     // ...
-}```
+} ```
 
 ### Валидация
 Для валидации используется зависимость
