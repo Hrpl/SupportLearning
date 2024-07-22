@@ -114,6 +114,34 @@ public class UserController {
     }
 }
 ```
+
+В этом примере, чтобы предотвратить сериализацию списка книг в JSON при выводе информации об авторе, вы можете использовать аннотацию @JsonManagedReference на стороне книги:
+
+@Entity
+```java
+public class Book {
+    // ...
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    @JsonManagedReference
+    private Author author;
+
+    // ...
+}```
+И аннотацию @JsonBackReference на стороне автора:
+```java
+@Entity
+public class Author {
+    // ...
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Book> books = new ArrayList<>();
+
+    // ...
+}```
+
 ### Валидация
 Для валидации используется зависимость
 ```xml
