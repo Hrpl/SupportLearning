@@ -95,6 +95,7 @@ public class main {
  System.out.println(p.getName());
  }
 }
+```
 
 Что бы изменить имя бина
 * @Bean(name = "miki");
@@ -103,8 +104,6 @@ public class main {
 
 Если будет несколько бинов одного типа то, чтобы сделать бин по умолчанию необходимо указать @Primary  
 
-
- ```
 
 ### Стереотипные аннотации
 
@@ -145,8 +144,12 @@ public static void main(String[] args) {
  Supplier<Parrot> parrotSupplier = () -> x; // функциональный интерфейс, для того чтобы возращать значения
  context.registerBean("parrot1",
  Parrot.class, parrotSupplier)
-
+}
 ```
+
+### Когда использовать @Component, а когда @Bean?
+
+@Component лучше использовать в случаях, когда мы можем изменить класс и он принадлежит проекту (является его частью), а иначе @Bean
 
 ### Создание связей между бинами
 Применение аннотации @Qualifier
@@ -176,13 +179,70 @@ public class ProjectConfig {
  }
 }
 ```
+Если при внедрении бина, в контексте будет несколько бинов одного типа, то конструктор выберет бин, чьё имя будет совпадать с параметром
+
+```java
+@Configuration
+public class ProjectConfig {
+ @Bean
+ public Parrot parrot1() {
+ Parrot p = new Parrot();
+ p.setName("Koko");
+ return p;
+ }
+ @Bean
+ public Parrot parrot2() {
+ Parrot p = new Parrot();
+ p.setName("Miki");
+ return p;
+ }
+ @Bean
+ public Person person(
+ @Qualifier("parrot2") Parrot parrot) {
+ Person p = new Person();
+ p.setName("Ella");
+ p.setParrot(parrot);
+ return p;
+ }
+}
+```
+### Нужен ли объетк в контексте Spring?
+
+DI - Объект, нужный нам для добавления в контекст Spring,
+либо имеет зависимость, которую мы хотим внедрить из контекста, либо сам является такой зависимостью.
+
+### Как выбрать одну реализацию интерфеса, если их несколько
+
+```java
+@Component
+@Qualifier("PUSH") // С помощью аннотации @Qualifier присваиваем реализации имя PUSH
+public class CommentPushNotificationProxy
+ implements CommentNotificationProxy {
+ // код класса
+}
+
+@Component
+@Qualifier("EMAIL") // С помощью аннотации @Qualifier присваиваем реализации имя EMAIL
+public class EmailCommentNotificationProxy
+ implements CommentNotificationProxy {
+ // код класса
+}
 
 
-
-
-
-
-
+@Component
+public class CommentService {
+ private final CommentRepository commentRepository;
+ private final CommentNotificationProxy commentNotificationProxy;
+ public CommentService(
+ CommentRepository commentRepository,
+ @Qualifier("PUSH") CommentNotificationProxy
+commentNotificationProxy) {
+ this.commentRepository = commentRepository;
+ this.commentNotificationProxy = commentNotificationProxy;
+ }
+ // остальной код класса
+}
+```
 
 
 
