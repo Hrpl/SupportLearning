@@ -1,0 +1,188 @@
+# Spring-framework
+
+## Базовые концепции
+Когда говорят про Spring, говорят о экосистеме фреймворков таких как:
+
+* Spring Core - это фундаментальная
+функциональная возможность, благодаря которой Spring может управлять
+экземплярами приложения. Также частью функционала Spring Core являются аспекты Spring.
+ С ними Spring может перехватывать определенные в приложении методы и манипулировать ими
+
+* Spring MVC (model-view-controller, «модель — представление — контроллер»). Эта часть фреймворка Spring позволяет создавать веб-приложения,
+обрабатывающие HTTP-запросы
+* Spring Data Access — еще одна базовая часть Spring. Она предоставляет
+основные инструменты для соединения с базами данных SQL, что позволяет
+реализовать уровень доступа к данным в приложении.
+* Spring Testing. Эта часть фреймворка включает в себя инструменты, позволяющие писать тесты для Spring-приложения
+* Spring Boot - Главная идея этой концепции состоит
+в следующем. Вместо того чтобы описывать все параметры конфигурации в самом
+фреймворке, Spring Boot предлагает некую конфигурацию по умолчанию, которую
+можно изменять по мере необходимости  
+
+Но основной частью является Spring Core. Spring работает по принципу
+инверсии управления (inversion of control, IoC): вместо того чтобы приложение
+само контролировало свое выполнение, управление передается некоторому
+другому программному обеспечению — в данном случае фреймворку Spring.  
+
+Благодаря контейнеру IoC, который часто называют контекстом Spring, объекты
+становятся видимыми для Spring, и фреймворк может их использовать в соответствии с заданной вами конфигурацией.  
+
+
+Нам необходимо включать бины в контекст Spring, потому что
+именно так мы сообщаем Spring, какими экземплярами объектов приложения
+должен управлять фреймворк
+
+Существуют следующие способы включить бин в контекст (далее
+мы рассмотрим их подробнее):
+* посредством аннотации @Bean;
+* посредством стереотипных аннотаций;
+* программно
+### @Bean
+Добавление зависимости 
+```xml
+<dependencies>
+ <dependency>
+ <groupId>org.Springframework</groupId>
+ <artifactId>Spring-context</artifactId>
+ <version>5.2.6.RELEASE</version>
+ </dependency>
+ </dependencies>
+```
+
+Создание экземпляра зависимости 
+```java
+public class main {
+ public static void main(String[] args) {
+ var context =
+ new AnnotationConfigApplicationContext();
+ Parrot p = new Parrot();
+ }
+}
+```
+Для добавления экземпляра класса в контекст Spring необходимо
+
+1. Определение конфигурационного класса в проекте
+```java
+@Configuration
+public class ProjectConfig {
+}
+```
+2.Определение метода @Bean
+```java
+@Configuration
+public class ProjectConfig {
+ @Bean
+ Parrot parrot() {
+ var p = new Parrot();
+ p.setName("Koko");
+ return p;
+ }
+}
+```
+Класс конфигурации позволяет, в частности, добавлять бины в контекст
+Spring. Для этого нужно определить метод, возвращающий экземпляр объекта, который мы хотим добавить в контекст, и снабдить этот метод аннотацией
+@Bean. Она сообщит Spring о том, что при инициализации контекста нужно
+вызвать данный метод и добавить возвращенное им значение в контекст.
+
+Инициализация контекста Spring на основании созданного класса конфигурации и обращение к экземпляру Parrot из контекста
+ ```java
+public class main {
+ public static void main(String[] args) {
+ var context =
+ new AnnotationConfigApplicationContext(
+ ProjectConfig.class);
+ Parrot p = context.getBean("parrot2", Parrot.class);
+ System.out.println(p.getName());
+ }
+}
+
+Что бы изменить имя бина
+* @Bean(name = "miki");
+* @Bean(value = "miki");
+* @Bean("miki").
+
+Если будет несколько бинов одного типа то, чтобы сделать бин по умолчанию необходимо указать @Primary  
+
+
+ ```
+
+### Стереотипные аннотации
+
+Применение стереотипной аннотации к классу Parrot
+```java
+@Component
+public class Parrot {
+ private String name;
+ public String getName() {
+ return name;
+ }
+ public void setName(String name) {
+ this.name = name;
+ }
+}
+
+```
+Использование аннотации @ComponentScan, чтобы сообщить Spring,
+где находятся классы со стереотипными аннотациями
+
+```java
+@Configuration
+@ComponentScan(basePackages = "main")
+public class ProjectConfig {
+}
+
+```
+В программе пустой конфигурационный файл, при этом Spring сам добавляет бины в контекст самостоятельно, поэтому возможен только один экземпляр
+### Программное добавление бина
+
+```java
+public static void main(String[] args) {
+ var context =
+ new AnnotationConfigApplicationContext(
+ ProjectConfig.class);
+ Parrot x = new Parrot();
+ x.setName("Kiki");
+ Supplier<Parrot> parrotSupplier = () -> x; // функциональный интерфейс, для того чтобы возращать значения
+ context.registerBean("parrot1",
+ Parrot.class, parrotSupplier)
+
+```
+
+### Создание связей между бинами
+Применение аннотации @Qualifier
+
+```java
+@Configuration
+public class ProjectConfig {
+ @Bean
+ public Parrot parrot1() {
+ Parrot p = new Parrot();
+ p.setName("Koko");
+ return p;
+ }
+ @Bean
+ public Parrot parrot2() {
+ Parrot p = new Parrot();
+ p.setName("Miki");
+ return p;
+ }
+ @Bean
+ public Person person(
+ @Qualifier("parrot2") Parrot parrot) {
+ Person p = new Person();
+ p.setName("Ella");
+ p.setParrot(parrot);
+ return p;
+ }
+}
+```
+
+
+
+
+
+
+
+
+
+
