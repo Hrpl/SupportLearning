@@ -1,0 +1,4 @@
+# Golang
+
+## Книги
+* Введение в программирование на Go Keleb-Doksi - https://docs.yandex.ru/docs/view?tm=1731697613&tld=ru&lang=ru&name=Vvedenie-v-programmirovanie-na-Go-Keleb-Doksi.pdf&text=Introducing%20Go%20%D0%BD%D0%B0%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%BC&url=https%3A%2F%2Flosst.pro%2Fwp-content%2Fuploads%2F2016%2F08%2FVvedenie-v-programmirovanie-na-Go-Keleb-Doksi.pdf&lr=36&mime=pdf&l10n=ru&sign=37559b98ec5b79d3aee49a60e26414bb&keyno=0&serpParams=tm%3D1731697613%26tld%3Dru%26lang%3Dru%26name%3DVvedenie-v-programmirovanie-na-Go-Keleb-Doksi.pdf%26text%3DIntroducing%2BGo%2B%25D0%25BD%25D0%25B0%2B%25D1%2580%25D1%2583%25D1%2581%25D1%2581%25D0%25BA%25D0%25BE%25D0%25BC%26url%3Dhttps%253A%2F%2Flosst.pro%2Fwp-content%2Fuploads%2F2016%2F08%2FVvedenie-v-programmirovanie-na-Go-Keleb-Doksi.pdf%26lr%3D36%26mime%3Dpdf%26l10n%3Dru%26sign%3D37559b98ec5b79d3aee49a60e26414bb%26keyno%3D0
